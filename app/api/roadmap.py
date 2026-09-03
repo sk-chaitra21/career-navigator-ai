@@ -2,10 +2,14 @@ from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
 from app.database.db import get_db
+
+from app.models.roadmap_model import Roadmap
+
 from app.schemas.roadmap_schema import (
     RoadmapCreate,
     RoadmapResponse
 )
+
 from app.services.roadmap_service import (
     get_all_roadmaps,
     get_roadmap_by_id,
@@ -15,15 +19,20 @@ from app.services.roadmap_service import (
     delete_roadmap
 )
 
+
 router = APIRouter(
     tags=["Roadmaps"]
 )
 
 
-# Get all roadmaps
+# =========================================================
+# GET ALL ROADMAPS
+# =========================================================
+
 @router.get(
     "/roadmaps",
-    response_model=list[RoadmapResponse]
+    response_model=list[RoadmapResponse],
+    summary="Get all roadmaps"
 )
 def read_roadmaps(
     db: Session = Depends(get_db)
@@ -31,10 +40,14 @@ def read_roadmaps(
     return get_all_roadmaps(db)
 
 
-# NEW API
+# =========================================================
+# GET ROADMAPS BY ROLE
+# =========================================================
+
 @router.get(
     "/roadmaps/role/{role_id}",
-    response_model=list[RoadmapResponse]
+    response_model=list[RoadmapResponse],
+    summary="Get roadmaps by role"
 )
 def read_roadmaps_by_role(
     role_id: int,
@@ -43,10 +56,37 @@ def read_roadmaps_by_role(
     return get_roadmaps_by_role(role_id, db)
 
 
-# Get roadmap by ID
+# =========================================================
+# GET ROADMAPS BY TECHNOLOGY PATH
+# =========================================================
+
+@router.get(
+    "/roadmaps/technology-path/{technology_path_id}",
+    response_model=list[RoadmapResponse],
+    summary="Get roadmaps by technology path"
+)
+def read_roadmaps_by_technology_path(
+    technology_path_id: int,
+    db: Session = Depends(get_db)
+):
+    return (
+        db.query(Roadmap)
+        .filter(
+            Roadmap.technology_path_id == technology_path_id
+        )
+        .order_by(Roadmap.step_order)
+        .all()
+    )
+
+
+# =========================================================
+# GET ROADMAP BY ID
+# =========================================================
+
 @router.get(
     "/roadmaps/{roadmap_id}",
-    response_model=RoadmapResponse
+    response_model=RoadmapResponse,
+    summary="Get roadmap by ID"
 )
 def read_roadmap(
     roadmap_id: int,
@@ -55,11 +95,15 @@ def read_roadmap(
     return get_roadmap_by_id(roadmap_id, db)
 
 
-# Create roadmap
+# =========================================================
+# CREATE ROADMAP
+# =========================================================
+
 @router.post(
     "/roadmaps",
     response_model=RoadmapResponse,
-    status_code=status.HTTP_201_CREATED
+    status_code=status.HTTP_201_CREATED,
+    summary="Create roadmap"
 )
 def add_roadmap(
     roadmap: RoadmapCreate,
@@ -68,10 +112,14 @@ def add_roadmap(
     return create_roadmap(roadmap, db)
 
 
-# Update roadmap
+# =========================================================
+# UPDATE ROADMAP
+# =========================================================
+
 @router.put(
     "/roadmaps/{roadmap_id}",
-    response_model=RoadmapResponse
+    response_model=RoadmapResponse,
+    summary="Update roadmap"
 )
 def edit_roadmap(
     roadmap_id: int,
@@ -85,8 +133,14 @@ def edit_roadmap(
     )
 
 
-# Delete roadmap
-@router.delete("/roadmaps/{roadmap_id}")
+# =========================================================
+# DELETE ROADMAP
+# =========================================================
+
+@router.delete(
+    "/roadmaps/{roadmap_id}",
+    summary="Delete roadmap"
+)
 def remove_roadmap(
     roadmap_id: int,
     db: Session = Depends(get_db)

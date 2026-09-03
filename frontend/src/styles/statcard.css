@@ -1,37 +1,202 @@
-.stat-card{
+/* =========================================
+   CAREER NAVIGATOR AI
+   Statistics Card
+   ========================================= */
 
-background:white;
+.stat-card {
+  position: relative;
 
-border-radius:15px;
+  min-height: 145px;
 
-padding:25px;
+  padding: 22px;
 
-box-shadow:0 5px 15px rgba(0,0,0,.08);
+  background: #ffffff;
 
-transition:.3s;
+  border: 1px solid var(--border);
 
-cursor:pointer;
+  border-radius: var(--radius-lg);
 
+  overflow: hidden;
+
+  box-shadow: var(--shadow-sm);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
-.stat-card:hover{
 
-transform:translateY(-5px);
+/* =========================================
+   HOVER
+   ========================================= */
 
+.stat-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow: var(--shadow);
+
+  border-color: #d7def0;
 }
 
-.stat-card h3{
 
-color:#666;
+/* =========================================
+   TOP AREA
+   ========================================= */
 
-margin-bottom:10px;
+.stat-card-top {
+  display: flex;
 
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 18px;
 }
 
-.stat-card h1{
 
-font-size:42px;
+/* =========================================
+   DOT
+   ========================================= */
 
-color:#4F46E5;
+.stat-card-dot {
+  width: 9px;
+
+  height: 9px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--card-accent);
+
+  box-shadow:
+    0 0 0 4px
+    color-mix(
+      in srgb,
+      var(--card-accent) 12%,
+      transparent
+    );
+}
+
+
+/* =========================================
+   LABEL
+   ========================================= */
+
+.stat-card-label {
+  color: var(--text-muted);
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.01em;
+}
+
+
+/* =========================================
+   VALUE
+   ========================================= */
+
+.stat-card-value {
+  color: var(--text-primary);
+
+  font-size: 34px;
+
+  line-height: 1;
+
+  font-weight: 750;
+
+  letter-spacing: -1px;
+}
+
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+.stat-card-footer {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 20px;
+}
+
+
+/* =========================================
+   ACCENT LINE
+   ========================================= */
+
+.stat-card-line {
+  width: 28px;
+
+  height: 3px;
+
+  border-radius: 999px;
+}
+
+
+/* =========================================
+   INFO
+   ========================================= */
+
+.stat-card-info {
+  color: #94a3b8;
+
+  font-size: 11px;
+
+  font-weight: 500;
+}
+
+
+/* =========================================
+   DECORATIVE ACCENT
+   ========================================= */
+
+.stat-card::after {
+  content: "";
+
+  position: absolute;
+
+  right: -35px;
+
+  bottom: -45px;
+
+  width: 110px;
+
+  height: 110px;
+
+  border-radius: 50%;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--card-accent) 7%,
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+  .stat-card {
+    min-height: 130px;
+
+    padding: 18px;
+  }
+
+  .stat-card-value {
+    font-size: 30px;
+  }
 
 }

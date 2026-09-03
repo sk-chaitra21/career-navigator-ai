@@ -1,203 +1,64 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FaUserCircle, FaSearch } from "react-icons/fa";
-
-import api from "../api/api";
-
-import "./../styles/navbar.css";
-
+import { Link, useLocation } from "react-router-dom";
 
 function Navbar() {
-
-  const navigate = useNavigate();
-
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
-  const [showResults, setShowResults] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-
-  const handleSearch = async (event) => {
-
-    const value = event.target.value;
-
-    setQuery(value);
-
-    if (value.trim().length === 0) {
-
-      setResults([]);
-      setShowResults(false);
-
-      return;
-    }
-
-
-    try {
-
-      setLoading(true);
-
-      const response = await api.get(
-        `/search?q=${encodeURIComponent(value)}`
-      );
-
-      setResults(response.data.results);
-
-      setShowResults(true);
-
-    } catch (error) {
-
-      console.error(
-        "Search failed:",
-        error
-      );
-
-      setResults([]);
-      setShowResults(false);
-
-    } finally {
-
-      setLoading(false);
-
-    }
-  };
-
-
-  const handleResultClick = (result) => {
-
-    setShowResults(false);
-    setQuery("");
-
-
-    if (result.type === "role") {
-
-      navigate(`/role/${result.id}`);
-
-    } else if (result.type === "skill") {
-
-      navigate(`/courses/${result.id}`);
-
-    } else if (result.type === "course") {
-
-      // Course details page can be connected later.
-      navigate(`/courses/${result.id}`);
-
-    }
-  };
-
+  const location = useLocation();
 
   return (
-
-    <nav className="navbar">
-
-
+    <header className="cn-navbar">
+      
       {/* Logo */}
+      <Link to="/" className="cn-logo">
+        Career Navigator <span>AI</span>
+      </Link>
 
-      <div className="navbar-logo">
+      {/* Navigation */}
+      <nav className="cn-nav">
+        <Link
+          to="/dashboard"
+          className={`cn-nav-link ${
+            location.pathname === "/dashboard" ? "active" : ""
+          }`}
+        >
+          Explore
+        </Link>
 
-        🚀 Career Navigator AI
+        <Link
+          to="/ai-advisor"
+          className={`cn-nav-link ${
+            location.pathname === "/ai-advisor" ? "active" : ""
+          }`}
+        >
+          AI Advisor
+        </Link>
 
-      </div>
+        <Link
+          to="/profile"
+          className={`cn-nav-link ${
+            location.pathname === "/profile" ? "active" : ""
+          }`}
+        >
+          Profile
+        </Link>
+      </nav>
 
+      {/* Actions */}
+      <div className="cn-nav-actions">
 
-      {/* Search */}
+        <Link to="/login">
+          <button className="cn-login">
+            Login
+          </button>
+        </Link>
 
-      <div className="navbar-search">
-
-        <FaSearch className="search-icon" />
-
-        <input
-          type="text"
-          value={query}
-          onChange={handleSearch}
-          placeholder="Search careers, skills, courses..."
-        />
-
-
-        {loading && (
-
-          <span className="search-loading">
-            ...
-          </span>
-
-        )}
-
-
-        {/* Search Results */}
-
-        {showResults && (
-
-          <div className="search-results">
-
-            {results.length === 0 ? (
-
-              <div className="no-results">
-                No results found
-              </div>
-
-            ) : (
-
-              results.map((result) => (
-
-                <div
-                  key={`${result.type}-${result.id}`}
-                  className="search-result"
-                  onClick={() =>
-                    handleResultClick(result)
-                  }
-                >
-
-                  <div className="result-type">
-
-                    {result.type === "role" && "💼"}
-
-                    {result.type === "skill" && "🧠"}
-
-                    {result.type === "course" && "📚"}
-
-                  </div>
-
-
-                  <div className="result-info">
-
-                    <strong>
-                      {result.title}
-                    </strong>
-
-                    <span>
-                      {result.type}
-                    </span>
-
-                  </div>
-
-                </div>
-
-              ))
-
-            )}
-
-          </div>
-
-        )}
+        <Link to="/register">
+          <button className="cn-register">
+            Register
+          </button>
+        </Link>
 
       </div>
-
-
-      {/* User */}
-
-      <div className="navbar-right">
-
-        <FaUserCircle size={28} />
-
-        <span>
-          Welcome
-        </span>
-
-      </div>
-
-    </nav>
-
+    </header>
   );
 }
-
 
 export default Navbar;

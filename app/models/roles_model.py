@@ -34,22 +34,36 @@ class Role(Base):
         nullable=False
     )
 
+    # Domain relationship
     domain = relationship(
         "Domain",
         back_populates="roles"
     )
+
+    # Role ↔ Skills
     skills = relationship(
-    "Skill",
-    secondary="role_skills",
-    back_populates="roles"
+        "Skill",
+        secondary="role_skills",
+        back_populates="roles"
     )
+
+    # Role ↔ Roadmaps
     roadmaps = relationship(
-    "Roadmap",
-    back_populates="role",
-    cascade="all, delete"
-    ) 
+        "Roadmap",
+        back_populates="role",
+        cascade="all, delete"
+    )
+
+    # Role ↔ Technology Paths
+    technology_paths = relationship(
+        "TechnologyPath",
+        back_populates="role",
+        cascade="all, delete"
+    )
+
+    # Role ↔ Saved Roles ↔ Users
     saved_by_users = relationship(
-    "User",
-    secondary="saved_roles",
-    back_populates="saved_roles"
-)  
+        "User",
+        secondary="saved_roles",
+        back_populates="saved_roles"
+    )

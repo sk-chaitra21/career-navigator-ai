@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api/api";
-import "./Register.css";
 
 function Register() {
   const navigate = useNavigate();
@@ -40,6 +39,7 @@ function Register() {
       console.log(response.data);
 
       navigate("/login");
+
     } catch (error) {
       console.error(error);
 
@@ -51,60 +51,101 @@ function Register() {
   };
 
   return (
-    <div className="register-container">
-      <div className="register-card">
-        <h1>Create Account</h1>
-        <p>Join Career Navigator AI 🚀</p>
+    <div className="auth-page">
 
-        <form onSubmit={handleSubmit}>
+      <div className="auth-card">
 
-          <input
-            type="text"
-            name="name"
-            placeholder="Full Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+        <div className="auth-heading">
+          <div className="auth-eyebrow">
+            CAREER NAVIGATOR AI
+          </div>
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+          <h1>
+            Create
+            <br />
+            <span>Account.</span>
+          </h1>
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
+          <p>
+            Start building your career direction.
+          </p>
+        </div>
 
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-          />
+        <form
+          className="auth-form"
+          onSubmit={handleSubmit}
+        >
 
-          <button type="submit">
-            Register
+          <div className="auth-field">
+            <label>Full Name</label>
+
+            <input
+              type="text"
+              name="name"
+              placeholder="Your full name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="auth-field">
+            <label>Email Address</label>
+
+            <input
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="auth-field">
+            <label>Password</label>
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Create a password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="auth-field">
+            <label>Confirm Password</label>
+
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm your password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="auth-submit"
+          >
+            Create Account →
           </button>
 
         </form>
 
-        <p>
+        <p className="auth-switch">
           Already have an account?{" "}
-          <Link to="/login">Login</Link>
+          <Link to="/login">
+            Login
+          </Link>
         </p>
+
       </div>
+
     </div>
   );
 }

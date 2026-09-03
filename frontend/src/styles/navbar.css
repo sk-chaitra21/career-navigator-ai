@@ -1,46 +1,77 @@
+/* =========================================
+   CAREER NAVIGATOR AI
+   Premium Navbar
+   ========================================= */
+
 .navbar {
-  height: 70px;
+  height: 68px;
 
   display: flex;
+
   align-items: center;
 
   justify-content: space-between;
 
+  gap: 24px;
+
   padding: 0 30px;
 
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.92);
 
-  border-bottom: 1px solid #e2e8f0;
+  backdrop-filter: blur(12px);
 
-  position: relative;
+  -webkit-backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid var(--border);
+
+  position: sticky;
+
+  top: 0;
 
   z-index: 1000;
+
+  box-shadow:
+    0 1px 3px rgba(15, 23, 42, 0.04);
 }
 
 
-/* ================================
+/* =========================================
    LOGO
-================================ */
+   ========================================= */
 
 .navbar-logo {
-  font-size: 21px;
+  display: flex;
 
-  font-weight: 700;
+  align-items: center;
 
-  color: #1e293b;
+  gap: 9px;
+
+  font-size: 19px;
+
+  font-weight: 750;
+
+  letter-spacing: -0.3px;
+
+  color: var(--text-primary);
 
   white-space: nowrap;
+
+  cursor: pointer;
+}
+
+.navbar-logo::first-letter {
+  font-size: 21px;
 }
 
 
-/* ================================
+/* =========================================
    SEARCH
-================================ */
+   ========================================= */
 
 .navbar-search {
   position: relative;
 
-  width: 420px;
+  width: min(420px, 40vw);
 
   display: flex;
 
@@ -52,9 +83,9 @@
 
   height: 42px;
 
-  padding: 0 40px;
+  padding: 0 42px;
 
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border);
 
   border-radius: 10px;
 
@@ -62,16 +93,39 @@
 
   font-size: 14px;
 
-  color: #334155;
+  color: var(--text-primary);
 
   background: #f8fafc;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.navbar-search input:focus {
-  border-color: #4f46e5;
+.navbar-search input:hover {
+  border-color: #cbd5e1;
 
   background: #ffffff;
 }
+
+.navbar-search input:focus {
+  border-color: var(--primary);
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.navbar-search input::placeholder {
+  color: #94a3b8;
+}
+
+
+/* =========================================
+   SEARCH ICON
+   ========================================= */
 
 .search-icon {
   position: absolute;
@@ -83,20 +137,29 @@
   font-size: 15px;
 
   z-index: 2;
+
+  pointer-events: none;
 }
+
+
+/* =========================================
+   SEARCH LOADING
+   ========================================= */
 
 .search-loading {
   position: absolute;
 
   right: 14px;
 
-  color: #64748b;
+  color: var(--primary);
+
+  font-size: 14px;
 }
 
 
-/* ================================
+/* =========================================
    SEARCH RESULTS
-================================ */
+   ========================================= */
 
 .search-results {
   position: absolute;
@@ -113,16 +176,35 @@
 
   background: #ffffff;
 
-  border-radius: 12px;
+  border-radius: 14px;
 
-  box-shadow:
-    0 8px 25px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-lg);
 
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border);
+
+  padding: 6px;
+
+  animation: searchDrop 0.15s ease-out;
+}
+
+@keyframes searchDrop {
+  from {
+    opacity: 0;
+
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
 }
 
 
-/* Individual result */
+/* =========================================
+   INDIVIDUAL SEARCH RESULT
+   ========================================= */
 
 .search-result {
   display: flex;
@@ -131,26 +213,36 @@
 
   gap: 12px;
 
-  padding: 13px 15px;
+  padding: 12px;
 
   cursor: pointer;
 
-  border-bottom: 1px solid #f1f5f9;
+  border-radius: 9px;
 
-  transition: background 0.2s ease;
+  border-bottom: none;
+
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
 }
 
 .search-result:hover {
   background: #f8fafc;
+
+  transform: translateX(2px);
 }
 
 
-/* Result icon */
+/* =========================================
+   RESULT ICON
+   ========================================= */
 
 .result-type {
-  width: 35px;
+  width: 36px;
 
-  height: 35px;
+  height: 36px;
+
+  flex-shrink: 0;
 
   display: flex;
 
@@ -158,15 +250,19 @@
 
   justify-content: center;
 
-  background: #eef2ff;
+  background: var(--primary-light);
 
-  border-radius: 8px;
+  color: var(--primary);
+
+  border-radius: 9px;
 
   font-size: 17px;
 }
 
 
-/* Result text */
+/* =========================================
+   RESULT TEXT
+   ========================================= */
 
 .result-info {
   display: flex;
@@ -174,16 +270,26 @@
   flex-direction: column;
 
   gap: 3px;
+
+  min-width: 0;
 }
 
 .result-info strong {
-  color: #1e293b;
+  color: var(--text-primary);
 
   font-size: 14px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
 }
 
 .result-info span {
-  color: #64748b;
+  color: var(--text-muted);
 
   font-size: 12px;
 
@@ -191,22 +297,24 @@
 }
 
 
-/* No results */
+/* =========================================
+   NO RESULTS
+   ========================================= */
 
 .no-results {
-  padding: 18px;
+  padding: 22px 18px;
 
   text-align: center;
 
-  color: #64748b;
+  color: var(--text-muted);
 
   font-size: 14px;
 }
 
 
-/* ================================
-   USER
-================================ */
+/* =========================================
+   USER AREA
+   ========================================= */
 
 .navbar-right {
   display: flex;
@@ -215,29 +323,61 @@
 
   gap: 10px;
 
-  color: #334155;
+  color: var(--text-secondary);
 
-  font-weight: 500;
+  font-size: 14px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.navbar-right svg {
+  color: var(--primary);
+
+  background: var(--primary-light);
+
+  border-radius: 50%;
+
+  padding: 2px;
+
+  box-sizing: content-box;
 }
 
 
-/* ================================
+/* =========================================
    RESPONSIVE
-================================ */
+   ========================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
 
   .navbar {
-    padding: 0 20px;
+    padding: 0 22px;
+
+    gap: 18px;
   }
 
   .navbar-search {
-    width: 300px;
+    width: min(350px, 38vw);
+  }
+
+}
+
+
+@media (max-width: 800px) {
+
+  .navbar {
+    padding: 0 18px;
+  }
+
+  .navbar-search {
+    width: 280px;
   }
 
   .navbar-logo {
-    font-size: 18px;
+    font-size: 17px;
   }
+
 }
 
 
@@ -246,13 +386,17 @@
   .navbar {
     height: auto;
 
-    min-height: 70px;
+    min-height: 68px;
 
     flex-wrap: wrap;
 
     gap: 12px;
 
     padding: 12px 15px;
+  }
+
+  .navbar-logo {
+    font-size: 17px;
   }
 
   .navbar-search {
@@ -264,4 +408,18 @@
   .navbar-right span {
     display: none;
   }
+
+}
+
+
+@media (max-width: 400px) {
+
+  .navbar-logo {
+    font-size: 15px;
+  }
+
+  .navbar-search input {
+    height: 40px;
+  }
+
 }

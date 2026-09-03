@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
+from app.models.course_model import Course
 
 from app.database.db import get_db
 from app.schemas.skill_schema import (
@@ -96,3 +97,24 @@ def remove_skill(
     db: Session = Depends(get_db)
 ):
     return delete_skill(skill_id, db)
+# Get courses for a skill
+@router.get(
+    "/skills/{skill_id}/courses",
+    summary="Get courses for a skill"
+)
+def read_courses_by_skill(
+    skill_id: int,
+    db: Session = Depends(get_db)
+):
+    skill = get_skill_by_id(skill_id, db)
+
+    if not skill:
+        return []
+
+    courses = (
+        db.query(Course)
+        .filter(Course.skill_id == skill_id)
+        .all()
+    )
+
+    return courses

@@ -6,6 +6,9 @@ from app.api.domain import router as domain_router
 from app.api.company import router as company_router
 from app.api.user import router as user_router
 from app.api import role_skill
+from app.api import technology_path
+from app.models.technology_path_model import TechnologyPath
+from app.models.path_skill_model import PathSkill
 from app.api import skill
 from app.api import search
 from app.models.progress_model import SkillProgress
@@ -18,6 +21,8 @@ from app.api.roadmap import router as roadmap_router
 from app.api.dashboard import router as dashboard_router
 from app.api.saved_role import router as saved_role_router
 from app.api.progress import router as progress_router
+from app.api.gemini import router as gemini_router
+from app.api.skill_gap import router as skill_gap_router
 # Database
 from app.database.db import engine, Base
 from app.models.roadmap_model import Roadmap
@@ -66,6 +71,9 @@ app.include_router(saved_role_router)
 app.include_router(recommendation_router)
 app.include_router(search.router)
 app.include_router(progress_router)
+app.include_router(gemini_router)
+app.include_router(skill_gap_router)
+app.include_router(technology_path.router)
 # Home API
 @app.get("/")
 def home():

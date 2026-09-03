@@ -1,0 +1,720 @@
+/* =========================================================
+   CAREER NAVIGATOR AI
+   Shared Career Journey Page Styles
+   ========================================================= */
+
+.career-page {
+  min-height: 100vh;
+  background: #0b1630;
+  color: #f4f7ff;
+  padding: 50px 32px 80px;
+}
+
+.career-container {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.career-header {
+  margin-bottom: 42px;
+}
+
+.career-eyebrow {
+  color: #22d3ee;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.career-title {
+  margin: 0;
+  color: #f4f7ff;
+  font-size: clamp(42px, 6vw, 68px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+}
+
+.career-subtitle {
+  margin: 16px 0 0;
+  max-width: 760px;
+  color: #aebbd0;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+.career-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 38px;
+  padding: 11px 18px;
+
+  background: transparent;
+  color: #f4f7ff;
+
+  border: 1px solid #314565;
+  border-radius: 10px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.career-back:hover {
+  border-color: #22d3ee;
+  color: #22d3ee;
+  transform: translateX(-2px);
+}
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.career-divider {
+  height: 1px;
+  border: 0;
+  background: #263b5e;
+  margin: 38px 0;
+}
+
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+.career-section {
+  margin-top: 48px;
+}
+
+.career-section-header {
+  margin-bottom: 24px;
+}
+
+.career-section-title {
+  margin: 0;
+  color: #f4f7ff;
+  font-size: 38px;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.career-section-description {
+  margin: 10px 0 0;
+  color: #9aabc5;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   ROLE CARDS
+   ========================================================= */
+
+.role-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.role-wrapper {
+  width: 100%;
+}
+
+.role-card {
+  width: 100%;
+  padding: 26px 28px;
+
+  background: #101f3d;
+  border: 1px solid #263b5e;
+  border-radius: 16px;
+
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.role-card:hover {
+  background: #132645;
+  border-color: #22d3ee;
+  transform: translateY(-2px);
+}
+
+.role-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.role-card-title {
+  margin: 0 0 9px;
+  color: #f4f7ff;
+  font-size: 27px;
+  line-height: 1.2;
+  font-weight: 750;
+}
+
+.role-card-description {
+  margin: 0;
+  color: #c4d0e1;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.role-salary {
+  margin: 12px 0 0;
+  color: #22d3ee;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.role-arrow {
+  flex-shrink: 0;
+  color: #22d3ee;
+  font-size: 22px;
+  padding-top: 3px;
+}
+
+/* =========================================================
+   TECHNOLOGY PATHS
+   ========================================================= */
+
+.technology-paths {
+  margin-top: 10px;
+  padding: 24px;
+
+  background: #0e1b35;
+  border: 1px solid #263b5e;
+  border-radius: 16px;
+
+  animation: careerSlideDown 0.2s ease;
+}
+
+.technology-paths-title {
+  margin: 0 0 18px;
+  color: #f4f7ff;
+  font-size: 22px;
+}
+
+.technology-path-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.technology-path-card {
+  padding: 20px;
+
+  background: #101f3d;
+  border: 1px solid #2b4265;
+  border-radius: 12px;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.technology-path-card:hover {
+  background: #15294d;
+  border-color: #22d3ee;
+  transform: translateX(3px);
+}
+
+.technology-path-name {
+  margin: 0 0 7px;
+  color: #f4f7ff;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.technology-path-link {
+  margin: 0;
+  color: #aebbd0;
+  font-size: 15px;
+}
+
+.technology-path-card:hover .technology-path-link {
+  color: #22d3ee;
+}
+
+/* =========================================================
+   TECHNOLOGY VARIANT GRID
+   ========================================================= */
+
+.path-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.path-card {
+  min-height: 280px;
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background: #101f3d;
+  border: 1px solid #263b5e;
+  border-radius: 18px;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.path-card:hover {
+  background: #15294d;
+  border-color: #22d3ee;
+  transform: translateY(-5px);
+}
+
+.path-card-title {
+  margin: 0 0 18px;
+  color: #f4f7ff;
+  font-size: 29px;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.path-card-description {
+  margin: 0;
+  color: #c4d0e1;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.path-card-link {
+  margin-top: 28px;
+  color: #22d3ee;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   SKILL GRID
+   ========================================================= */
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.skill-card {
+  min-height: 150px;
+  padding: 22px;
+
+  background: #101f3d;
+  border: 1px solid #263b5e;
+  border-radius: 15px;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.skill-card:hover {
+  background: #15294d;
+  border-color: #22d3ee;
+  transform: translateY(-3px);
+}
+
+.skill-card-title {
+  margin: 0 0 8px;
+  color: #f4f7ff;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.skill-card-description {
+  margin: 0;
+  color: #aebbd0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.skill-card-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: #22d3ee;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   ROADMAP
+   ========================================================= */
+
+.roadmap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.roadmap-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+
+  padding: 22px;
+
+  background: #101f3d;
+  border: 1px solid #263b5e;
+  border-radius: 15px;
+
+  transition: border-color 0.2s ease;
+}
+
+.roadmap-card:hover {
+  border-color: #22d3ee;
+}
+
+.roadmap-number {
+  min-width: 42px;
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #17314e;
+  color: #22d3ee;
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.roadmap-content {
+  flex: 1;
+}
+
+.roadmap-title {
+  margin: 0 0 7px;
+  color: #f4f7ff;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.roadmap-description {
+  margin: 0;
+  color: #aebbd0;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   SKILL PAGE
+   ========================================================= */
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.course-card {
+  padding: 24px;
+
+  background: #101f3d;
+  border: 1px solid #263b5e;
+  border-radius: 16px;
+}
+
+.course-title {
+  margin: 0 0 10px;
+  color: #f4f7ff;
+  font-size: 21px;
+}
+
+.course-description {
+  margin: 0;
+  color: #aebbd0;
+  line-height: 1.6;
+}
+
+.course-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: #22d3ee;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.course-link:hover {
+  color: #67e8f9;
+}
+
+/* =========================================================
+   EMPTY / ERROR / LOADING
+   ========================================================= */
+
+.career-empty {
+  padding: 40px;
+  text-align: center;
+
+  background: #101f3d;
+  border: 1px solid #263b5e;
+  border-radius: 16px;
+}
+
+.career-empty-title {
+  margin: 0 0 8px;
+  color: #f4f7ff;
+  font-size: 21px;
+}
+
+.career-empty-text {
+  margin: 0;
+  color: #9aabc5;
+}
+
+/* =========================================================
+   ROLE DETAILS
+   ========================================================= */
+
+.role-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 26px;
+}
+
+.role-info-card {
+  padding: 22px;
+
+  background: #101f3d;
+  border: 1px solid #263b5e;
+  border-radius: 15px;
+}
+
+.role-info-icon {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.role-info-label {
+  display: block;
+  color: #8fa2bf;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.role-info-value {
+  color: #f4f7ff;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.role-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 35px;
+}
+
+.role-action-button {
+  padding: 12px 17px;
+
+  background: #101f3d;
+  color: #f4f7ff;
+
+  border: 1px solid #314765;
+  border-radius: 10px;
+
+  cursor: pointer;
+  font-weight: 600;
+
+  transition: all 0.2s ease;
+}
+
+.role-action-button:hover {
+  border-color: #22d3ee;
+  color: #22d3ee;
+}
+
+.role-action-button.ai-button {
+  border-color: #22d3ee;
+  color: #22d3ee;
+}
+
+.role-action-button.ai-button:hover {
+  background: #12364a;
+}
+
+.progress-card,
+.ai-card {
+  padding: 28px;
+  margin-bottom: 35px;
+
+  background: #101f3d;
+  border: 1px solid #263b5e;
+  border-radius: 18px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.progress-label {
+  color: #22d3ee;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.progress-title {
+  margin: 5px 0 0;
+  color: #f4f7ff;
+  font-size: 23px;
+}
+
+.progress-number {
+  color: #22d3ee;
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  background: #1b2d4a;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #22d3ee;
+  border-radius: 20px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  margin: 12px 0 0;
+  color: #9aabc5;
+}
+
+/* =========================================================
+   AI
+   ========================================================= */
+
+.ai-card {
+  border-color: #28506a;
+}
+
+.ai-title {
+  margin: 5px 0 0;
+  color: #f4f7ff;
+  font-size: 25px;
+}
+
+.ai-block {
+  margin-top: 22px;
+}
+
+.ai-block-title {
+  margin: 0 0 10px;
+  color: #f4f7ff;
+  font-size: 18px;
+}
+
+.ai-block-text,
+.ai-block li {
+  color: #b8c6da;
+  line-height: 1.7;
+}
+
+.ai-readiness {
+  padding: 18px;
+  background: #0e293a;
+  border: 1px solid #23516a;
+  border-radius: 12px;
+}
+
+.ai-readiness strong {
+  display: block;
+  margin-bottom: 7px;
+  color: #22d3ee;
+}
+
+.ai-readiness p {
+  margin: 0;
+  color: #c4d0e1;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 850px) {
+  .path-grid,
+  .skill-grid,
+  .role-info-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .career-page {
+    padding: 35px 18px 60px;
+  }
+
+  .career-title {
+    font-size: 42px;
+  }
+
+  .career-section-title {
+    font-size: 30px;
+  }
+
+  .path-grid,
+  .skill-grid,
+  .role-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .role-card,
+  .path-card {
+    padding: 22px;
+  }
+
+  .role-card-title {
+    font-size: 23px;
+  }
+}
+
+@keyframes careerSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

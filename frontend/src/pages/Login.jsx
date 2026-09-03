@@ -21,7 +21,6 @@ function Login() {
     e.preventDefault();
 
     try {
-      // FastAPI OAuth2PasswordRequestForm expects x-www-form-urlencoded
       const params = new URLSearchParams();
 
       params.append("username", formData.email);
@@ -37,8 +36,10 @@ function Login() {
         }
       );
 
-      // Save JWT Token
-      localStorage.setItem("token", response.data.access_token);
+      localStorage.setItem(
+        "token",
+        response.data.access_token
+      );
 
       alert("Login Successful!");
 
@@ -49,7 +50,14 @@ function Login() {
 
       if (error.response) {
         console.log(error.response.data);
-        alert(JSON.stringify(error.response.data, null, 2));
+
+        alert(
+          JSON.stringify(
+            error.response.data,
+            null,
+            2
+          )
+        );
       } else {
         alert(error.message);
       }
@@ -57,39 +65,75 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
-      <h1>Login</h1>
+    <div className="auth-page">
 
-      <form onSubmit={handleSubmit}>
+      <div className="auth-card">
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
+        <div className="auth-heading">
+          <div className="auth-eyebrow">
+            CAREER NAVIGATOR AI
+          </div>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
+          <h1>
+            Welcome
+            <br />
+            <span>Back.</span>
+          </h1>
 
-        <button type="submit">
-          Login
-        </button>
+          <p>
+            Continue your career journey.
+          </p>
+        </div>
 
-      </form>
+        <form
+          className="auth-form"
+          onSubmit={handleSubmit}
+        >
 
-      <p>
-        Don't have an account?
-        <Link to="/register"> Register</Link>
-      </p>
+          <div className="auth-field">
+            <label>Email Address</label>
+
+            <input
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="auth-field">
+            <label>Password</label>
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="auth-submit"
+          >
+            Login →
+          </button>
+
+        </form>
+
+        <p className="auth-switch">
+          Don't have an account?{" "}
+          <Link to="/register">
+            Register
+          </Link>
+        </p>
+
+      </div>
+
     </div>
   );
 }

@@ -1,29 +1,260 @@
+/* =========================================
+   CAREER NAVIGATOR AI
+   Premium Sidebar
+   ========================================= */
+
 .sidebar {
   width: 240px;
-  height: calc(100vh - 70px);
 
-  background: white;
+  min-width: 240px;
 
-  box-shadow: 2px 0 10px rgba(0,0,0,.08);
+  height: calc(100vh - 68px);
 
-  padding-top: 30px;
+  position: sticky;
+
+  top: 68px;
+
+  background: #ffffff;
+
+  border-right: 1px solid var(--border);
+
+  padding: 22px 12px;
+
+  overflow-y: auto;
+
+  z-index: 900;
+
+  box-shadow:
+    2px 0 10px rgba(15, 23, 42, 0.03);
 }
 
-.sidebar a {
-  display: block;
 
-  padding: 18px 25px;
+/* =========================================
+   NAVIGATION LINKS
+   ========================================= */
+
+.sidebar a {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 12px 14px;
+
+  margin-bottom: 5px;
+
+  border-radius: 10px;
 
   text-decoration: none;
 
-  color: #333;
+  color: var(--text-secondary);
 
-  font-size: 17px;
+  font-size: 14px;
 
-  transition: .3s;
+  font-weight: 600;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
+
+/* =========================================
+   HOVER
+   ========================================= */
+
 .sidebar a:hover {
-  background: #4f46e5;
-  color: white;
+  background: var(--primary-light);
+
+  color: var(--primary);
+
+  transform: translateX(2px);
+}
+
+
+/* =========================================
+   ACTIVE LINK
+   ========================================= */
+
+.sidebar a.active {
+  background:
+    linear-gradient(
+      135deg,
+      #eef2ff,
+      #f5f3ff
+    );
+
+  color: var(--primary);
+
+  box-shadow:
+    inset 3px 0 0 var(--primary);
+}
+
+
+/* =========================================
+   ICON SUPPORT
+   ========================================= */
+
+.sidebar a svg {
+  width: 18px;
+
+  height: 18px;
+
+  flex-shrink: 0;
+
+  color: currentColor;
+}
+
+
+/* =========================================
+   SECTION LABEL
+   ========================================= */
+
+.sidebar-section {
+  padding: 12px 14px 8px;
+
+  color: #94a3b8;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================
+   SIDEBAR DIVIDER
+   ========================================= */
+
+.sidebar-divider {
+  height: 1px;
+
+  margin: 18px 10px;
+
+  background: var(--border-light);
+}
+
+
+/* =========================================
+   AI NAVIGATION
+   ========================================= */
+
+.sidebar .ai-link {
+  background:
+    linear-gradient(
+      135deg,
+      #f5f3ff,
+      #eef2ff
+    );
+
+  color: #6d28d9;
+
+  border: 1px solid #e9d5ff;
+}
+
+.sidebar .ai-link:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #ede9fe,
+      #e0e7ff
+    );
+
+  color: #5b21b6;
+}
+
+
+/* =========================================
+   SCROLLBAR
+   ========================================= */
+
+.sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+
+  border-radius: 999px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 900px) {
+
+  .sidebar {
+    width: 210px;
+
+    min-width: 210px;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .sidebar {
+    width: 100%;
+
+    min-width: 0;
+
+    height: auto;
+
+    position: relative;
+
+    top: 0;
+
+    border-right: none;
+
+    border-bottom: 1px solid var(--border);
+
+    padding: 10px;
+
+    display: flex;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+  }
+
+  .sidebar a {
+    flex-shrink: 0;
+
+    margin-bottom: 0;
+
+    white-space: nowrap;
+  }
+
+  .sidebar-section,
+  .sidebar-divider {
+    display: none;
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .sidebar {
+    padding: 8px;
+  }
+
+  .sidebar a {
+    padding: 10px 12px;
+
+    font-size: 13px;
+  }
+
 }

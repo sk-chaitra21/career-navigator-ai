@@ -5,12 +5,33 @@ function StatCard({ title, value, color }) {
     <div
       className="stat-card"
       style={{
-        borderTop: `5px solid ${color}`,
+        "--card-accent": color,
       }}
     >
-      <h3>{title}</h3>
+      <div className="stat-card-top">
+        <span className="stat-card-dot"></span>
 
-      <h1>{value}</h1>
+        <span className="stat-card-label">
+          {title}
+        </span>
+      </div>
+
+      <div className="stat-card-value">
+        {value}
+      </div>
+
+      <div className="stat-card-footer">
+        <span
+          className="stat-card-line"
+          style={{
+            background: color,
+          }}
+        />
+
+        <span className="stat-card-info">
+          Available on platform
+        </span>
+      </div>
     </div>
   );
 }

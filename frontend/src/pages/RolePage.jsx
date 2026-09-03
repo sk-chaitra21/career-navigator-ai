@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../api/api";
+import "../styles/career-pages.css";
 
 function RolePage() {
   const { domainId } = useParams();
   const navigate = useNavigate();
 
   const [roles, setRoles] = useState([]);
+  const [technologyPaths, setTechnologyPaths] = useState({});
+  const [expandedRole, setExpandedRole] = useState(null);
 
   useEffect(() => {
     fetchRoles();
@@ -15,53 +18,165 @@ function RolePage() {
   const fetchRoles = async () => {
     try {
       const response = await api.get(`/roles/domain/${domainId}`);
-
-      console.log(response.data);
-
       setRoles(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
+  const fetchTechnologyPaths = async (roleId) => {
+    try {
+      const response = await api.get(
+        `/technology-paths/role/${roleId}`
+      );
+
+      setTechnologyPaths((prev) => ({
+        ...prev,
+        [roleId]: response.data,
+      }));
+
+      setExpandedRole(roleId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleRoleClick = (roleId) => {
+    if (expandedRole === roleId) {
+      setExpandedRole(null);
+      return;
+    }
+
+    if (technologyPaths[roleId]) {
+      setExpandedRole(roleId);
+      return;
+    }
+
+    fetchTechnologyPaths(roleId);
+  };
+
   return (
-    <div style={{ padding: "40px" }}>
-      <h1
-        style={{
-          textAlign: "center",
-          marginBottom: "40px",
-        }}
-      >
-        Career Roles
-      </h1>
+    <div className="career-page">
+      <div className="career-container">
 
-      {roles.length === 0 ? (
-        <h3>No Roles Found</h3>
-      ) : (
-        roles.map((role) => (
-          <div
-            key={role.id}
-            onClick={() => navigate(`/role/${role.id}`)}
-            style={{
-              border: "1px solid #ddd",
-              borderRadius: "12px",
-              padding: "25px",
-              marginBottom: "20px",
-              cursor: "pointer",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-              transition: "0.3s",
-            }}
-          >
-            <h2>{role.title}</h2>
+        <header className="career-header">
+          <div className="career-eyebrow">
+            Explore Careers
+          </div>
 
-            <p>{role.description}</p>
+          <h1 className="career-title">
+            Career Roles
+          </h1>
 
-            <p>
-              <strong>Salary:</strong> {role.salary}
+          <p className="career-subtitle">
+            Choose a role to explore its technology paths,
+            skills and learning journey.
+          </p>
+        </header>
+
+        {roles.length === 0 ? (
+          <div className="career-empty">
+            <h3 className="career-empty-title">
+              No Roles Found
+            </h3>
+
+            <p className="career-empty-text">
+              There are no career roles available for this domain yet.
             </p>
           </div>
-        ))
-      )}
+        ) : (
+          <div className="role-list">
+
+            {roles.map((role) => (
+              <div
+                key={role.id}
+                className="role-wrapper"
+              >
+
+                {/* ROLE */}
+                <div
+                  className="role-card"
+                  onClick={() => handleRoleClick(role.id)}
+                >
+                  <div className="role-card-top">
+
+                    <div>
+                      <h2 className="role-card-title">
+                        {role.title}
+                      </h2>
+
+                      <p className="role-card-description">
+                        {role.description}
+                      </p>
+
+                      <p className="role-salary">
+                        Salary · {role.salary}
+                      </p>
+                    </div>
+
+                    <span className="role-arrow">
+                      {expandedRole === role.id
+                        ? "↑"
+                        : "↓"}
+                    </span>
+
+                  </div>
+                </div>
+
+                {/* TECHNOLOGY PATHS */}
+                {expandedRole === role.id &&
+                  technologyPaths[role.id] && (
+                    <div className="technology-paths">
+
+                      <h3 className="technology-paths-title">
+                        Technology Paths
+                      </h3>
+
+                      {technologyPaths[role.id].length === 0 ? (
+                        <div className="career-empty">
+                          <p className="career-empty-text">
+                            No technology paths available yet.
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="technology-path-list">
+
+                          {technologyPaths[role.id].map(
+                            (path) => (
+                              <div
+                                key={path.id}
+                                className="technology-path-card"
+                                onClick={() =>
+                                  navigate(
+                                    `/technology-path/${path.id}`
+                                  )
+                                }
+                              >
+                                <h3 className="technology-path-name">
+                                  {path.name}
+                                </h3>
+
+                                <p className="technology-path-link">
+                                  Explore skills, resources
+                                  and roadmap →
+                                </p>
+                              </div>
+                            )
+                          )}
+
+                        </div>
+                      )}
+
+                    </div>
+                  )}
+
+              </div>
+            ))}
+
+          </div>
+        )}
+
+      </div>
     </div>
   );
 }
