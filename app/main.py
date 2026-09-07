@@ -23,8 +23,10 @@ from app.api.saved_role import router as saved_role_router
 from app.api.progress import router as progress_router
 from app.api.gemini import router as gemini_router
 from app.api.skill_gap import router as skill_gap_router
+
 # Database
 from app.database.db import engine, Base
+
 from app.models.roadmap_model import Roadmap
 from app.api.recommendation import router as recommendation_router
 
@@ -35,42 +37,76 @@ from app.models.domain_model import Domain
 from app.models.roles_model import Role
 from app.models.skill_model import Skill
 from app.models.role_skill_model import RoleSkill
+
+
 # Create all tables
 Base.metadata.create_all(bind=engine)
 
+
 # Create FastAPI App
+app = FastAPI(
+    title="Career Navigator AI",
+    description="Google Maps for Tech Careers",
+    version="1.0.0",
+    debug=True
+)
+
+
+# CORS
 app.add_middleware(
     CORSMiddleware,
 
     allow_origins=[
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "http://localhost:5174",
-    "http://127.0.0.1:5174",
-    "https://career-navigator-ai-nine.vercel.app",
-],
+        # Local development
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://localhost:5174",
+        "http://127.0.0.1:5174",
+
+        # Production frontend
+        "https://career-navigator-ai-nine.vercel.app",
+    ],
 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
 # Register Routers
 app.include_router(domain_router)
+
 app.include_router(company_router)
+
 app.include_router(user_router)
+
 app.include_router(skill_router)
+
 app.include_router(role_skill.router)
+
 app.include_router(role_router)
+
 app.include_router(course_router)
+
 app.include_router(roadmap_router)
+
 app.include_router(dashboard_router)
+
 app.include_router(saved_role_router)
+
 app.include_router(recommendation_router)
+
 app.include_router(search.router)
+
 app.include_router(progress_router)
+
 app.include_router(gemini_router)
+
 app.include_router(skill_gap_router)
+
 app.include_router(technology_path.router)
+
+
 # Home API
 @app.get("/")
 def home():
