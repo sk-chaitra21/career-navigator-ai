@@ -12,6 +12,8 @@ function Register() {
     confirmPassword: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -28,25 +30,34 @@ function Register() {
     }
 
     try {
+      setLoading(true);
+
       const response = await api.post("/register", {
         name: formData.name,
         email: formData.email,
         password: formData.password,
       });
 
+      console.log("REGISTER RESPONSE:", response.data);
+
       alert("Registration Successful!");
-
-      console.log(response.data);
-
       navigate("/login");
 
     } catch (error) {
-      console.error(error);
+      console.error("REGISTER ERROR:", error);
+
+      console.error(
+        "Backend response:",
+        error.response?.data
+      );
 
       alert(
         error.response?.data?.detail ||
-        "Registration Failed!"
+        "Registration failed. Check the browser console for details."
       );
+
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -106,7 +117,7 @@ function Register() {
             <label>Password</label>
 
             <input
-              type="password"
+              type="text"
               name="password"
               placeholder="Create a password"
               value={formData.password}
@@ -119,7 +130,7 @@ function Register() {
             <label>Confirm Password</label>
 
             <input
-              type="password"
+              type="text"
               name="confirmPassword"
               placeholder="Confirm your password"
               value={formData.confirmPassword}
@@ -131,8 +142,11 @@ function Register() {
           <button
             type="submit"
             className="auth-submit"
+            disabled={loading}
           >
-            Create Account →
+            {loading
+              ? "Creating Account..."
+              : "Create Account →"}
           </button>
 
         </form>

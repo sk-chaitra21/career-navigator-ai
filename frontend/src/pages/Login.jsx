@@ -26,15 +26,11 @@ function Login() {
       params.append("username", formData.email);
       params.append("password", formData.password);
 
-      const response = await api.post(
-        "/login",
-        params,
-        {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        }
-      );
+      const response = await api.post("/login", params, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      });
 
       localStorage.setItem(
         "token",
@@ -42,31 +38,21 @@ function Login() {
       );
 
       alert("Login Successful!");
-
       navigate("/dashboard");
 
     } catch (error) {
-      console.error(error);
+      console.error("LOGIN ERROR:", error);
 
-      if (error.response) {
-        console.log(error.response.data);
-
-        alert(
-          JSON.stringify(
-            error.response.data,
-            null,
-            2
-          )
-        );
-      } else {
-        alert(error.message);
-      }
+      alert(
+        error.response?.data?.detail ||
+        error.message ||
+        "Login failed."
+      );
     }
   };
 
   return (
     <div className="auth-page">
-
       <div className="auth-card">
 
         <div className="auth-heading">
@@ -107,7 +93,7 @@ function Login() {
             <label>Password</label>
 
             <input
-              type="password"
+              type="text"
               name="password"
               placeholder="Enter your password"
               value={formData.password}
@@ -133,7 +119,6 @@ function Login() {
         </p>
 
       </div>
-
     </div>
   );
 }
