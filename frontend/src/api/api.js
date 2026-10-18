@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "baseURL: "https://career-navigator-ai-api.onrender.com",",
+baseURL: "https://career-navigator-ai-api.onrender.com",
   headers: {
     "Content-Type": "application/json",
   },
