@@ -40,7 +40,10 @@ from app.models.role_skill_model import RoleSkill
 
 
 # Create all tables
-Base.metadata.create_all(bind=engine)
+try:
+    Base.metadata.create_all(bind=engine)
+except Exception as e:
+    print("Database connection failed:", e)
 
 
 # Create FastAPI App
